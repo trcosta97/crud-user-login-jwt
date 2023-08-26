@@ -5,7 +5,7 @@ public record AdressSignInData(
         String street,
         String city,
         String cep,
-        State state,
+        Province province,
         String complement
 
 ) {

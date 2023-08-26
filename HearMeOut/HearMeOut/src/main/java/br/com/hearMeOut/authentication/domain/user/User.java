@@ -2,6 +2,7 @@ package br.com.hearMeOut.authentication.domain.user;
 
 import br.com.hearMeOut.authentication.domain.address.Address;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,15 +19,15 @@ import java.util.Date;
 import java.util.List;
 
 @Entity(name = "User")
-@Table(name = "user")
+@Table(name = "tb_user")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
@@ -37,8 +38,8 @@ public class User implements UserDetails {
     @Column (name = "password", nullable = false)
     private String password;
     @JoinColumn(name = "address_id", nullable = false)
-    @OneToOne
-    @JsonBackReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private Address address;
     @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)

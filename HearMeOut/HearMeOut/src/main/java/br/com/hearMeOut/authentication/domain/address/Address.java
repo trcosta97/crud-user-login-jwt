@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "address")
+@Table(name = "tb_address")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
+    @SequenceGenerator(name = "address_seq", sequenceName = "address_seq", allocationSize = 1)
     private long id;
-    @Column(name = "number")
+    @Column(name = "house_number")
     private String number;
     @Column(name = "street", nullable = false)
     private String street;
@@ -24,8 +25,8 @@ public class Address {
     private String city;
     @Column(name = "cep", nullable = false)
     private String cep;
-    @Column(name = "state", nullable = false)
-    private State state;
+    @Column(name = "province", nullable = false)
+    private Province province;
     @Column(name = "complement")
     private String complement;
 
@@ -34,7 +35,7 @@ public class Address {
         this.street = data.street();
         this.city = data.city();
         this.cep = data.cep();
-        this.state = data.state();
+        this.province = data.province();
         this.complement = data.complement();
     }
 }
