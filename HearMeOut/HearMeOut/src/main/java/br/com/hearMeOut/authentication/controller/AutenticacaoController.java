@@ -1,6 +1,6 @@
 package br.com.hearMeOut.authentication.controller;
 
-import br.com.hearMeOut.authentication.domain.user.DadosAutenticacao;
+import br.com.hearMeOut.authentication.domain.user.AuthenticationData;
 import br.com.hearMeOut.authentication.domain.user.User;
 import br.com.hearMeOut.authentication.infra.security.DadosTokenJWT;
 import br.com.hearMeOut.authentication.infra.security.TokenService;
@@ -22,11 +22,17 @@ public class AutenticacaoController {
 
     @CrossOrigin(origins="*")
     @PostMapping
-    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
+    public ResponseEntity efetuarLogin(@RequestBody @Valid AuthenticationData dados) {
+        System.out.println("Começou");
+
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.email(), dados.password());
+        System.out.println("Buscou senha e login");
+
         var authentication  = manager.authenticate(authenticationToken);
+        System.out.println("Autenticou");
 
         var tokenJWT = tokenService.gerarToken((User) authentication.getPrincipal());
+        System.out.println("Gerou token");
 
         return ResponseEntity.ok( new DadosTokenJWT(tokenJWT));
     }
