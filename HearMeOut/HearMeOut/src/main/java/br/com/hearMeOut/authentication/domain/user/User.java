@@ -56,6 +56,11 @@ public class User implements UserDetails {
 
     }
 
+    public User(UserUpdateData data) {
+        this.email = data.email();
+        this.password = data.password();
+    }
+
     @PrePersist
     public void prePersist(){
         this.signDate = LocalDateTime.now();
