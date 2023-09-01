@@ -1,5 +1,6 @@
 package br.com.hearMeOut.authentication.domain.address;
 
+import br.com.hearMeOut.authentication.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,9 @@ public class Address {
     private Province province;
     @Column(name = "complement")
     private String complement;
+    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "address")
+    private User user;
 
     public Address(AdressSignInData data) {
         this.number = data.number();
