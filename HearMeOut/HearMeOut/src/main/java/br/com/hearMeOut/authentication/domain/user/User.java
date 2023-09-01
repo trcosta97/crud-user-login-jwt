@@ -20,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
@@ -35,6 +36,7 @@ public class User implements UserDetails {
     private String password;
     @JoinColumn(name = "address_id", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private Address address;
     @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -53,6 +55,11 @@ public class User implements UserDetails {
         this.address = new Address(data.address());
         this.gender = data.gender();
 
+    }
+
+    public User(UserUpdateData data) {
+        this.email = data.email();
+        this.password = data.password();
     }
 
     @PrePersist
