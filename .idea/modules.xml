@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/HearMeOut/HearMeOut/HearMeOut.iml" filepath="$PROJECT_DIR$/HearMeOut/HearMeOut/HearMeOut.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/devOps-sprint3-hearMeOut.iml" filepath="$PROJECT_DIR$/.idea/devOps-sprint3-hearMeOut.iml" />
-    </modules>
-  </component>
-</project>
